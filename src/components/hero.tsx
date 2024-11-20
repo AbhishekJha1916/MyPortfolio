@@ -1,5 +1,6 @@
 // components/Hero.js
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -11,7 +12,7 @@ export default function Hero() {
       <div className="w-full md:w-1/2">
         <h1 className="text-5xl font-extrabold text-gray-800">
           Hello! <br />
-          I'm <span className="text-indigo-600">Abhishek Kumar Jha</span>
+          I&rsquo;m <span className="text-indigo-600">Abhishek Kumar Jha</span>
         </h1>
         <p className="text-lg text-gray-600 mt-4">
           Freelance web developer and graphics designer.
@@ -19,9 +20,9 @@ export default function Hero() {
         <button className="mt-6 bg-pink-500 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-600 transition-transform transform hover:scale-105">
           Hire Me
         </button>
-        <a href="/resume.pdf" className="mt-6 ml-2 bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-pink-500 transition-transform transform hover:scale-105" download>
+        <Link href="/resume.pdf" className="mt-6 ml-2 bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-pink-500 transition-transform transform hover:scale-105" download>
           Resume
-        </a>
+        </Link>
       </div>
 
       {/* Right Section */}

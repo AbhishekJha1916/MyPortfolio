@@ -32,7 +32,7 @@ const Contact = () => {
                 <div className="max-w-7xl mx-auto px-6">
                     <h1 className="text-3xl font-bold text-center text-gray-800">Contact Me</h1>
                     <p className="text-center text-lg mt-4 text-gray-600">
-                        I'd love to hear from you. Please fill out the form below to get in touch!
+                        I&rsquo;d love to hear from you. Please fill out the form below to get in touch!
                     </p>
 
                     <div className="mt-10 max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">

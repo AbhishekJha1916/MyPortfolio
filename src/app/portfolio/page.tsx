@@ -11,7 +11,7 @@ const Portfolio = () => {
                         <h1 className="text-4xl font-bold text-gray-800">My Portfolio</h1>
 
                         <p className="text-gray-600 mt-4 text-lg">
-                            Here are some of the projects I've worked on.
+                            Here are some of the projects I&rsquo;ve worked on.
                         </p>
 
                         {/* Project Section */}

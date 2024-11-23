@@ -62,7 +62,7 @@ export default function Hero() {
           I&rsquo;m <span className="text-indigo-600">Abhishek Kumar Jha</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 mt-4">
-          <span className="typing-text">{displayedText}</span>
+          <span className="typing-text">I am a {displayedText}</span>
         </p>
         <div className="mt-6">
           <button className="bg-pink-500 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-600 transition-transform transform hover:scale-105">

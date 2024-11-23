@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* For small devices (less than 768px) */
+@media screen and (max-width: 768px) {
+    header .max-w-screen-xl {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  
+    header .text-3xl {
+      font-size: 2rem; /* Smaller logo for small devices */
+    }
+  
+    header nav {
+      display: none; /* Hide the menu on small devices initially */
+    }
+  
+    header .hamburger-menu {
+      display: block; /* Show the hamburger menu */
+    }
+  }
+  
+  /* For large devices (above 768px) */
+  @media screen and (min-width: 768px) {
+    header nav {
+      display: block; /* Display the menu normally on larger screens */
+    }
+  
+    header .hamburger-menu {
+      display: none; /* Hide the hamburger on larger screens */
+    }
+  }

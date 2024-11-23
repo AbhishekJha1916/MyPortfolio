@@ -1,7 +1,55 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Hero() {
+  const [textIndex, setTextIndex] = useState(0);
+  const [isErasing, setIsErasing] = useState(false);
+  const [displayedText, setDisplayedText] = useState("");
+
+  const phrases = [
+    "Web Developer",
+    "Graphic Designer",
+    "Video Editor",
+    "Data Analyst",
+  ];
+
+  useEffect(() => {
+    let timeout;
+    const currentPhrase = phrases[textIndex];
+
+    // Control typing and erasing logic with pauses
+    if (!isErasing) {
+      // Typing Effect
+      timeout = setTimeout(() => {
+        setDisplayedText(currentPhrase.slice(0, displayedText.length + 1));
+      }, 100); // Speed of typing
+
+      // Once the whole phrase is typed, pause for a short time, then start erasing
+      if (displayedText === currentPhrase) {
+        setTimeout(() => {
+          setIsErasing(true);
+        }, 1000); // Pause before erasing
+      }
+    } else {
+      // Erasing Effect
+      timeout = setTimeout(() => {
+        setDisplayedText(currentPhrase.slice(0, displayedText.length - 1));
+      }, 100); // Speed of erasing
+
+      // Once all text is erased, move to the next phrase
+      if (displayedText === "") {
+        setIsErasing(false);
+        setTextIndex((prevIndex) => (prevIndex + 1) % phrases.length); // Go to next phrase
+      }
+    }
+
+    return () => clearTimeout(timeout); // Clear the timeout when component unmounts
+  }, [displayedText, isErasing, textIndex]);
+
+
   return (
     <section
       id="home"
@@ -14,7 +62,7 @@ export default function Hero() {
           I&rsquo;m <span className="text-indigo-600">Abhishek Kumar Jha</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 mt-4">
-          Freelance web developer and graphics designer.
+          <span className="typing-text">{displayedText}</span>
         </p>
         <div className="mt-6">
           <button className="bg-pink-500 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-600 transition-transform transform hover:scale-105">
@@ -30,11 +78,11 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right Section */}
-      <div className="relative w-full md:w-1/2 min-h-screen flex items-center justify-center bg-gradient-to-tr from-pink-500 to-indigo-600">
+      {/* Right Section (Hidden on small screens) */}
+      <div className="relative w-full md:w-1/2 min-h-screen items-center justify-center bg-gradient-to-tr from-pink-500 to-indigo-600 hidden md:block">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/profile.jpg" // Your profile image
+            src="/profile.jpg"
             alt="Profile Picture"
             layout="fill"
             objectFit="contain"

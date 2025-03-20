@@ -1,8 +1,8 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
   const [textIndex, setTextIndex] = useState(0);
@@ -20,35 +20,29 @@ export default function Hero() {
     let timeout;
     const currentPhrase = phrases[textIndex];
 
-    // Control typing and erasing logic with pauses
     if (!isErasing) {
-      // Typing Effect
       timeout = setTimeout(() => {
         setDisplayedText(currentPhrase.slice(0, displayedText.length + 1));
-      }, 100); // Speed of typing
+      }, 100);
 
-      // Once the whole phrase is typed, pause for a short time, then start erasing
       if (displayedText === currentPhrase) {
         setTimeout(() => {
           setIsErasing(true);
-        }, 1000); // Pause before erasing
+        }, 1000);
       }
     } else {
-      // Erasing Effect
       timeout = setTimeout(() => {
         setDisplayedText(currentPhrase.slice(0, displayedText.length - 1));
-      }, 100); // Speed of erasing
+      }, 100);
 
-      // Once all text is erased, move to the next phrase
       if (displayedText === "") {
         setIsErasing(false);
-        setTextIndex((prevIndex) => (prevIndex + 1) % phrases.length); // Go to next phrase
+        setTextIndex((prevIndex) => (prevIndex + 1) % phrases.length);
       }
     }
 
-    return () => clearTimeout(timeout); // Clear the timeout when component unmounts
+    return () => clearTimeout(timeout);
   }, [displayedText, isErasing, textIndex]);
-
 
   return (
     <section
@@ -65,9 +59,13 @@ export default function Hero() {
           <span className="typing-text">I am a {displayedText}</span>
         </p>
         <div className="mt-6">
-          <button className="bg-pink-500 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-600 transition-transform transform hover:scale-105">
+          {/* Hire Me button with mailto link */}
+          <a
+            href="mailto:akjha418@gmail.com?subject=Hiring Inquiry"
+            className="bg-pink-500 text-white px-6 py-3 rounded-lg shadow hover:bg-indigo-600 transition-transform transform hover:scale-105"
+          >
             Hire Me
-          </button>
+          </a>
           <Link
             href="/resume.pdf"
             className="mt-4 ml-2 bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:bg-pink-500 transition-transform transform hover:scale-105"

@@ -11,6 +11,9 @@ const Contact = () => {
         message: "",
     });
 
+    // State for handling form submission status
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
@@ -19,10 +22,26 @@ const Contact = () => {
         }));
     };
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        // Handle form submission (e.g., send form data to an API or email)
-        console.log(formData);
+        setStatus("loading");
+
+        try {
+            const response = await fetch("https://formspree.io/f/xjkygqjd", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                setStatus("success");
+                setFormData({ name: "", email: "", message: "" });
+            } else {
+                throw new Error("Something went wrong");
+            }
+        } catch {
+            setStatus("error");
+        }
     };
 
     return (
@@ -88,10 +107,19 @@ const Contact = () => {
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none"
+                                className="w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none disabled:opacity-50"
+                                disabled={status === "loading"}
                             >
-                                Send Message
+                                {status === "loading" ? "Sending..." : "Send Message"}
                             </button>
+
+                            {/* Success or Error Message */}
+                            {status === "success" && (
+                                <p className="mt-4 text-green-600 text-center">Message sent successfully!</p>
+                            )}
+                            {status === "error" && (
+                                <p className="mt-4 text-red-600 text-center">Failed to send message. Try again.</p>
+                            )}
                         </form>
                     </div>
                 </div>
